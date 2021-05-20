@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sales_order_custom" resource="default" engine="innodb" comment="Sales Order Custom">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                    comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false"
+                    comment="Order ID"/>
+        <column xsi:type="text" name="custom_name" nullable="true" comment="Custom Name"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint> 
+        <constraint xsi:type="foreign" referenceId="SALES_ORDER_CUSTOM_ORDER_ID_SALES_ORDER_ENTITY_ID"
+                    table="sales_order_custom" column="order_id" referenceTable="sales_order"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="SALES_ORDER_CUSTOM_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+        </index>               
+    </table>
+</schema> 
